@@ -1,0 +1,34 @@
+.product-record>td{
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+}
+
+.product-table {
+    border-collapse: collapse;
+}
+.tag {
+    background: gray;
+    color: white;
+    padding: 5px;
+}
+
+.add-to-cart {
+    background: #bb0c0c;
+    border-radius: 25%;
+    font-size: 150%;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.in-cart {
+    background: #3989ff;
+    border-radius: 25%;
+    font-size: 150%;
+    font-weight: bold;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}

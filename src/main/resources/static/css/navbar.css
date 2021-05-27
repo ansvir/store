@@ -1,0 +1,49 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    font-family: sans-serif;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.navbar li a:hover {
+    background-color: #111;
+}
+
+.navbar img {
+    width: 25%;
+    height: auto;
+    padding: 10px 10px;
+}
+
+.navbar li button {
+    background: transparent;
+    border: none;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.navbar li button:hover {
+    background-color: #111;
+}
