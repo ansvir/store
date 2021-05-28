@@ -3,29 +3,67 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register</title>
+    <link th:href="@{/../static/css/content.css}" rel="stylesheet"/>
 </head>
 
 <body>
-<img th:src="@{/../static/images/logo.png}"/>
+<div class="content">
+    <img th:src="@{/../static/images/logo.png}"/>
 
-<h1>Register</h1>
+    <h1>Register</h1>
 
-<form method="POST" th:action="@{/register}" id="registerForm">
 
-    <label for="username">Username: </label>
-    <input id="username" type="text" name="username"/><br/>
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" name="password"/><br/>
-
-    <label for="confirm">Confirm password: </label>
-    <input id="confirm" type="password" name="confirm"/><br/>
-
-    <label for="email">Email: </label>
-    <input id="email" type="email" name="email"/><br/>
-
-    <input type="submit" value="Register"/>
-</form>
-
+    <form method="POST" th:action="@{/register}" id="registerForm" th:object="${registrationDTO}">
+        <div class="validation-error" th:if="${#fields.hasErrors('userExists')}" th:error="*{userExists}">User with this nickname already exists!</div>
+        <div class="validation-error" th:if="${#fields.hasErrors('confirm')}" th:error="*{confirm}">Entered passwords don't match</div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="username">Username: </label>
+                    </td>
+                    <td>
+                        <input id="username" type="text" name="username"/>
+                        <span class="validation-error"
+                              th:if="${#fields.hasErrors('username')}"
+                              th:errors="*{username}">Incorrect username or such user exists</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password: </label>
+                    </td>
+                    <td>
+                        <input id="password" type="password" name="password"/>
+                        <span class="validation-error"
+                              th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}">Incorrect password</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="confirm">Confirm password: </label>
+                    </td>
+                    <td>
+                        <input id="confirm" type="password" name="confirmPassword"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Email: </label>
+                    </td>
+                    <td>
+                        <input id="email" type="text" name="email"/>
+                        <span class="validation-error"
+                              th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">Incorrect password</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Register"/>
+    </form>
+</div>
 </body>
 </html>

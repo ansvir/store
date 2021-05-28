@@ -3,28 +3,33 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link th:href="@{/../static/css/content.css}" rel="stylesheet"/>
 </head>
 
 <body>
-<img th:src="@{/../static/images/logo.png}"/>
+<div class="content">
 
-<h1>Login</h1>
 
-<div th:if="${error}">
-    Unable to login. Check your username and password.
+    <img th:src="@{/../static/images/logo.png}"/>
+
+    <h1>Login</h1>
+
+    <div class="validation-error" th:if="${param.error}">
+        Unable to login. Check your username and password.
+    </div>
+
+    <form method="POST" th:action="@{/login}" id="loginForm">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username"/><br/>
+
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password"/><br/>
+
+        <input type="submit" value="Login"/>
+
+        <p>Not registered?
+            <a th:href="@{/register}">Register</a></p>
+    </form>
 </div>
-
-<form method="POST" th:action="@{/login}" id="loginForm">
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username" /><br/>
-
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password" /><br/>
-
-    <input type="submit" value="Login"/>
-
-    <p>Not registered?
-        <a th:href="@{/register}">Register</a></p>
-</form>
 </body>
 </html>

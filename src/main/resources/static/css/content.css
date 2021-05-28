@@ -1,6 +1,6 @@
 .content {
     margin: auto;
-    max-width: 70%;
+    width: 50%;
 }
 
 .disable-select {
@@ -9,4 +9,8 @@
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.validation-error {
+    color: red;
 }

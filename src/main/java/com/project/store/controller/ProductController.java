@@ -4,6 +4,7 @@ import com.project.store.domain.Product;
 import com.project.store.domain.User;
 import com.project.store.model.Cart;
 import com.project.store.repository.ProductRepository;
+import com.project.store.repository.TagRepository;
 import com.project.store.repository.UserRepository;
 import com.project.store.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RequestMapping("/product")
 @Controller
@@ -26,6 +28,9 @@ public class ProductController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
     @GetMapping("/all")
     public String getProductsPage(Model model) {
         populateProducts(model);
@@ -33,9 +38,8 @@ public class ProductController {
     }
 
     private void populateProducts(Model model) {
-        List<Product> products = new ArrayList<>();
-        productRepository.findAll().forEach(products::add);
-        model.addAttribute("products", products);
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("tags", tagRepository.findAll());
     }
 
     @ModelAttribute("cart")

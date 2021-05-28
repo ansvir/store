@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let $productsTrs = $('[id^="product-"]');
     let productTrsIds = [];
-    let $productsAddsSpans, $productsRemovesSpans;
     let csrfToken = $("input[name='_csrf']").val();
 
     let $addToCartTrs;
@@ -52,9 +51,9 @@ $(document).ready(function () {
                 $removeFromCartTrs = $('[id^="removeFromCart-"]');
             }
         })).done(function (ajax) {
-            $(document).on('click', `.productAction`, function () {
-                toggleProductAction($(this));
-            });
+        $(document).on('click', `.productAction`, function () {
+            toggleProductAction($(this));
+        });
     });
 
     /**
@@ -88,6 +87,40 @@ $(document).ready(function () {
             `);
             sendAjaxRemoveFromCart(productId);
         }
+    }
+
+    let filters = {
+        description: '',
+        tags: ''
+    };
+
+    let descriptionsTags = [];
+    let tableTrs = $('#productsTable').find('tr');
+    for (let i = 0; i < tableTrs.length; i++) {
+        descriptionsTags.push({description: tableTrs[1], tags: tableTrs[2]});
+    }
+
+    $(document).on('change', '#searchTags', function () {
+        filters.tags = $(this).val().toUpperCase();
+        runSearch(filters);
+    })
+
+    $(document).on('input', '#searchProducts', function () {
+        filters.description = $('#searchProducts').val().toUpperCase();
+        runSearch(filters);
+    });
+
+    function runSearch(filters) {
+        let trs = $('#productsTable').find('tr');
+
+        let restTrs = $.grep(trs, tr => {
+            return $($(tr).find('td')[1]).text().toUpperCase().indexOf(filters.description) > -1 &&
+                $($(tr).find('td')[2]).text().toUpperCase().indexOf(filters.tags) > -1 ||
+                filters.description === '' && filters.tags === '-';
+        });
+
+        $(trs).hide();
+        $(restTrs).show();
     }
 
     function sendAjaxGetQuantity() {

@@ -34,6 +34,14 @@
 </ul>
 <div class="content">
     <h1>Products</h1>
+    <input type="search" id="searchProducts" placeholder="Search..." class="search-products"/>
+    <label for="searchTags">Tags</label>
+    <select class="search-tags" id="searchTags">
+        <option>-</option>
+        <th:block th:each="tag: ${tags}">
+            <option th:id="'tagSearch-' + ${tag.id}" th:text="${tag.name}"></option>
+        </th:block>
+    </select>
     <form>
         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         <table id="productsTable" class="product-table">
