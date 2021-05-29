@@ -3,6 +3,6 @@ package com.project.store.model;
 import lombok.Data;
 
 @Data
-public class RemoveFromCart {
+public class RemoveFromCartDTO {
     private Long productId;
 }

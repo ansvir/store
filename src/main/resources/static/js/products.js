@@ -1,10 +1,11 @@
 $(document).ready(function () {
     let $productsTrs = $('[id^="product-"]');
     let productTrsIds = [];
-    let csrfToken = $("input[name='_csrf']").val();
 
     let $addToCartTrs;
     let $removeFromCartTrs;
+
+    let csrfToken = $("input[name='_csrf']").val();
 
     $(document).ajaxSend(function (e, xhr, options) {
         xhr.setRequestHeader('X-CSRF-Token', csrfToken);

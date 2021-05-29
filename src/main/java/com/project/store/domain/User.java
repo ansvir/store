@@ -39,4 +39,8 @@ public class User {
     public boolean removeProduct(Product product) {
         return products.remove(product);
     }
+
+    public void retainProducts() {
+        products.clear();
+    }
 }

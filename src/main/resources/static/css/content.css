@@ -14,3 +14,17 @@
 .validation-error {
     color: red;
 }
+
+button {
+    padding: 5px;
+    background: #3989ff;
+    color: white;
+    font-size: 100%;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333;
+}
