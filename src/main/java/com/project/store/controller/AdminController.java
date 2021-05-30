@@ -71,7 +71,6 @@ public class AdminController {
                     }
                     break;
                 }
-                System.out.println("product intend to be changed");
                 productService.changeProduct(product, product.getId());
                 break;
             }
@@ -93,7 +92,6 @@ public class AdminController {
                         productToForceUpdate.setName(update.getProductName());
                         productToForceUpdate.setDescription(update.getProductDescription());
                         productToForceUpdate.setTags(new LinkedHashSet<>(update.getProductTags()));
-                        System.out.println(productToForceUpdate.toString());
                         break;
                     }
                 }
