@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,7 @@ public class AdminController {
     }
 
     @PostMapping("/command")
+    @Transactional
     public String processProductAction(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, @RequestParam("command") String command, Model model, Principal principal) {
         switch (command) {
             case "change_product": {
