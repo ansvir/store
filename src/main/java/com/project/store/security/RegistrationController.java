@@ -1,6 +1,9 @@
 package com.project.store.security;
 
+import com.project.store.domain.Role;
+import com.project.store.domain.RoleEnum;
 import com.project.store.domain.User;
+import com.project.store.repository.RoleRepository;
 import com.project.store.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/register")
@@ -16,11 +21,13 @@ public class RegistrationController {
 
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
+    private RoleRepository roleRepo;
 
     public RegistrationController(
-            UserRepository userRepo, PasswordEncoder passwordEncoder) {
+            UserRepository userRepo, PasswordEncoder passwordEncoder, RoleRepository roleRepo) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepo = roleRepo;
     }
 
     @GetMapping
@@ -48,7 +55,11 @@ public class RegistrationController {
             return "registration";
         }
 
-        userRepo.save(registrationDTO.toUser(passwordEncoder));
+        User newUser = registrationDTO.toUser(passwordEncoder);
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepo.findByName(RoleEnum.ROLE_USER.name()));
+        newUser.setRoles(roles);
+        userRepo.save(newUser);
         return "redirect:/login";
     }
 

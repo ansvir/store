@@ -55,14 +55,21 @@ public class AdminController {
                 if (!usersProductInCart.isEmpty()) {
                     User currentAdmin = userRepository.findByUsername(principal.getName());
                     if (sendNotificationProductInCart(usersProductInCart, currentAdmin, product)) {
-                        ForceUpdate forceUpdate = new ForceUpdate();
-                        System.out.println(product.toString());
-                        forceUpdate.setProduct(product);
-                        forceUpdateRepository.save(forceUpdate);
-                        model.addAttribute("forceUpdateProduct", forceUpdate);
+                        try {
+                            ForceUpdate forceUpdate = new ForceUpdate();
+                            forceUpdate.setProductId(product.getId());
+                            forceUpdate.setProductName(product.getName());
+                            forceUpdate.setProductDescription(product.getDescription());
+                            forceUpdate.setProductTags(product.getTags());
+                            forceUpdateRepository.save(forceUpdate);
+                            model.addAttribute("forceUpdateProduct", forceUpdate);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     break;
                 }
+                System.out.println("product intend to be changed");
                 productService.changeProduct(product, product.getId());
                 break;
             }
@@ -78,15 +85,19 @@ public class AdminController {
                 List<ForceUpdate> forceUpdateList = (List<ForceUpdate>) forceUpdateRepository.findAll();
                 Product productToForceUpdate = null;
                 for (ForceUpdate update : forceUpdateList) {
-                    if (update.getProduct().getId().equals(product.getId())) {
-                        productToForceUpdate = update.getProduct();
+                    if (update.getProductId().equals(product.getId())) {
+                        productToForceUpdate = new Product();
+                        productToForceUpdate.setId(update.getProductId());
+                        productToForceUpdate.setName(update.getProductName());
+                        productToForceUpdate.setDescription(update.getProductDescription());
+                        productToForceUpdate.setTags(new LinkedHashSet<>(update.getProductTags()));
                         System.out.println(productToForceUpdate.toString());
                         break;
                     }
                 }
                 productService.changeProduct(productToForceUpdate, productToForceUpdate.getId());
                 sendNotificationProductForceUpdated(product, productToForceUpdate);
-                forceUpdateRepository.deleteById(product.getId());
+                forceUpdateRepository.deleteForceUpdateByProductId(productToForceUpdate.getId());
                 break;
             }
         }
@@ -103,7 +114,12 @@ public class AdminController {
         model.addAttribute("tags", tagRepository.findAll());
         Set<Product> productsToForceUpdate = new LinkedHashSet<>();
         forceUpdateRepository.findAll().forEach(update -> {
-            productsToForceUpdate.add(update.getProduct());
+            Product productToForceUpdate = new Product();
+            productToForceUpdate.setId(update.getProductId());
+            productToForceUpdate.setName(update.getProductName());
+            productToForceUpdate.setDescription(update.getProductDescription());
+            productToForceUpdate.setTags(update.getProductTags());
+            productsToForceUpdate.add(productToForceUpdate);
         });
         model.addAttribute("forceUpdatesProducts", productsToForceUpdate);
     }
