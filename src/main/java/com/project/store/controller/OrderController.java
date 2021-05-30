@@ -3,7 +3,6 @@ package com.project.store.controller;
 import com.project.store.domain.Order;
 import com.project.store.domain.Product;
 import com.project.store.domain.User;
-import com.project.store.model.CartDTO;
 import com.project.store.repository.OrderRepository;
 import com.project.store.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -43,7 +39,7 @@ public class OrderController {
         sendMessage(order, currentUser);
         currentUser.retainProducts();
         userRepository.save(currentUser);
-        return "redirect:/";
+        return "redirect:/product/all";
     }
 
     private void sendMessage(Order order, User toUser) {

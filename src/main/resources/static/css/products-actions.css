@@ -1,18 +1,3 @@
-.product-record>td{
-    border: 2px solid black;
-    margin: 20px;
-    padding: 20px;
-}
-
-.product-table {
-    border-collapse: collapse;
-}
-.tag {
-    background: gray;
-    color: white;
-    padding: 5px;
-}
-
 .add-to-cart {
     background: #bb0c0c;
     border-radius: 25%;
@@ -33,13 +18,22 @@
     cursor: pointer;
 }
 
-.search-products {
+.change-button {
     padding: 5px;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    background: #00cd82;
+    color: white;
+    font-size: 100%;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
 }
 
-.search-tags {
+.delete-button {
     padding: 5px;
-    margin-bottom: 10px;
+    background: #bb0c0c;
+    color: white;
+    font-size: 100%;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
 }

@@ -1,0 +1,25 @@
+.product-record>td{
+    border: 2px solid black;
+    margin: 20px;
+    padding: 20px;
+}
+
+.product-table {
+    border-collapse: collapse;
+}
+.tag {
+    background: gray;
+    color: white;
+    padding: 5px;
+}
+
+.search-products {
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.search-tags {
+    padding: 5px;
+    margin-bottom: 10px;
+}

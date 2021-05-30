@@ -23,6 +23,7 @@ button {
     border: none;
     border-radius: 5%;
     cursor: pointer;
+    margin: 5px;
 }
 
 button:hover {

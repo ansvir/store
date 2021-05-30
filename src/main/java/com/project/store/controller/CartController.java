@@ -2,9 +2,9 @@ package com.project.store.controller;
 
 import com.project.store.domain.Product;
 import com.project.store.domain.User;
-import com.project.store.model.AddToCartDTO;
-import com.project.store.model.CartDTO;
-import com.project.store.model.RemoveFromCartDTO;
+import com.project.store.dto.AddToCartDTO;
+import com.project.store.dto.CartDTO;
+import com.project.store.dto.RemoveFromCartDTO;
 import com.project.store.repository.ProductRepository;
 import com.project.store.repository.TagRepository;
 import com.project.store.repository.UserRepository;

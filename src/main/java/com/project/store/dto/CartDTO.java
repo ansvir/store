@@ -1,4 +1,4 @@
-package com.project.store.model;
+package com.project.store.dto;
 
 import com.project.store.domain.Product;
 import lombok.Data;
