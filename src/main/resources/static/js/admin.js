@@ -4,7 +4,15 @@ $(document).ready(function() {
     let $closeModal = $('#closeModal');
     let $changeProductButtons = $('[id^="changeProduct-"]');
     let $deleteProductButtons = $('[id^="deleteProduct-"]');
+    let $forceUpdateProductButtons = $('[id^="forceUpdateProduct-"]');
     let $addProductButton = $('#addProduct');
+    let $productLoaders = $('[id^="loaderProduct-"]');
+
+    for (let i = 0; i < $productLoaders.length; i++) {
+        $($productLoaders[i]).hide();
+    }
+
+    $('#loaderForm').hide();
 
     let products;
 
@@ -57,6 +65,26 @@ $(document).ready(function() {
                 });
             }
 
+            for (let i = 0; i < $forceUpdateProductButtons.length; i++) {
+                $(document).on('click', `#${$forceUpdateProductButtons[i].id}`, function() {
+                    currentCommand = 'force_update';
+                    currentProductId = $forceUpdateProductButtons[i].id.substring(19);
+                    for (let i = 0; i < products.length; i++) {
+                        if (products[i].id == currentProductId) {
+                            currentProduct = products[i];
+                        }
+                    }
+
+                    $('#productName').val(currentProduct.name);
+                    $('#productDescription').val(currentProduct.description);
+                    let currentTagsNames = [];
+                    for (let i = 0; i < currentProduct.tags.length; i++) {
+                        currentTagsNames.push(currentProduct.tags[i].name);
+                    }
+                    $('#productTags').val(currentTagsNames);
+                });
+            }
+
             $($closeModal).on('click', function() {
                 $($modal).css("display", "none");
             });
@@ -64,8 +92,9 @@ $(document).ready(function() {
             $('#productsActionsForm').submit(function(e) {
                 $('#command').val(currentCommand);
                 $("#productId").val(currentProductId);
-                console.log($('#productId').val());
-            })
+                $('#loaderForm').show();
+                $('#loaderProduct-' + currentProductId).show();
+            });
 
             function cleanModal() {
                 $('#productName').val('')
@@ -73,9 +102,9 @@ $(document).ready(function() {
                 $("#productTags").val([]);
             }
         }
-    })
+    });
 
     // $(document).on('click', function() {
     //     $($modal).css("display", "none");
     // });
-})
+});

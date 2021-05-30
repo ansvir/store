@@ -37,3 +37,13 @@
     border-radius: 5%;
     cursor: pointer;
 }
+
+.force-update-product {
+    padding: 5px;
+    background: #3989ff;
+    color: white;
+    font-size: 100%;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+}
