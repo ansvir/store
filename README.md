@@ -28,4 +28,5 @@ Application written on Java that allows to perform simple actions of view and pu
 Default email for all users (administrators): svirepa.anton@gmail.com. It can be changed in com.project.store.database.DatabaseLoader.java class
 
 ## How to run an application:
-1.
+1. git clone https://github.com/ansvir/store
+2. run in the root folder: <code>mvn spring-boot:run</code>
